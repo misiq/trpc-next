@@ -7,7 +7,7 @@ const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
 	const hello = trpc.hello.useQuery({ text: "Mati!" });
-	const user = trpc.getUserById.useQuery({ text: "1" });
+	const user = trpc.getUserById.useQuery({ text: 2 });
 	if (!hello.data) {
 		return <div>Loading...</div>;
 	}
@@ -21,7 +21,6 @@ export default function Home() {
 			</Head>
 			<main className={styles.main}>
 				<div>{hello.data.greeting}</div>
-
 				{user && user.data?.name}
 			</main>
 		</>

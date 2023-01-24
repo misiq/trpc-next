@@ -1,27 +1,14 @@
 import { z } from "zod";
+import { prisma } from "../prisma";
 import { procedure, router } from "../trpc";
-
-interface User {
-	id: string;
-	name: string;
-}
-
-const userList: User[] = [
-	{
-		id: "1",
-		name: "KATT",
-	},
-];
 
 export const appRouter = router({
 	hello: procedure.input(z.object({ text: z.string() })).query(({ input }) => {
 		return { greeting: `hello ${input.text}` };
 	}),
 
-	getUserById: procedure.input(z.object({ text: z.string() })).query(({ input }) => {
-		const user = userList.find((u) => u.id === input.text);
-
-		return user;
+	getUserById: procedure.input(z.object({ text: z.number() })).query(({ input }) => {
+		return prisma.user.findFirst({ where: { id: input.text } });
 	}),
 });
 

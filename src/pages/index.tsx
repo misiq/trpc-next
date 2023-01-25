@@ -6,6 +6,13 @@ import { trpc } from "../utils/trpc";
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
+	const result = trpc.hello.halko.useQuery({ name: "Roberto" });
+	const test = trpc.hello.greetByUserId.useQuery({ id: 5 });
+
+	if (test.isLoading) {
+		return <h1>Loading...</h1>;
+	}
+
 	return (
 		<>
 			<Head>
@@ -15,7 +22,7 @@ export default function Home() {
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
 			<main className={styles.main}>
-				<h1>Hello </h1>
+				<h1>Hello {test.data?.name}</h1>
 			</main>
 		</>
 	);

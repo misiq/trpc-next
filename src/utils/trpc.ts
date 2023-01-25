@@ -27,14 +27,8 @@ export const trpc = createTRPCNext<AppRouter>({
 					url: `${getBaseUrl()}/api/trpc`,
 				}),
 			],
-			/**
-			 * @link https://tanstack.com/query/v4/docs/reference/QueryClient
-			 **/
-			// queryClientConfig: { defaultOptions: { queries: { staleTime: 60 } } },
 		};
 	},
-	/**
-	 * @link https://trpc.io/docs/ssr
-	 **/
-	ssr: true,
+
+	ssr: false,
 });
